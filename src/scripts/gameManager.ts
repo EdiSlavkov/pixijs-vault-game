@@ -48,6 +48,7 @@ export default class GameManager {
         onComplete: () => {
           this.start();
           this.resetTimer();
+          this.updateClock();
         },
       })
       .to([this.app.handleContainer, this.app.handleShadow], {
@@ -67,7 +68,7 @@ export default class GameManager {
   }
   toggleDoor = (): void => {
     this.app.door.visible = !this.app.door.visible;
-    this.app.openedDoor.visible = !this.app.openedDoor.visible;
+    this.app.openedDoorContainer.visible = !this.app.openedDoorContainer.visible;
   };
   isInRightDirection(direction: Direction): boolean {
     return direction === this.codeGenerator.secretCode[0].direction;
@@ -107,19 +108,23 @@ export default class GameManager {
     if (this.codeGenerator.secretCode.length === 0) {
       this.toggleDoor();
       this.app.app.ticker.remove(this.timerCallback);
+      this.timeline();
       let store = 0;
-      this.app.app.ticker.add(function callback(delta) {
+      let b = (delta:number) => {
         store += delta / 60;
         if (store >= 5) {
-          this.gameWinHandler();
-          this.app.app.ticker.remove(callback);
+          this.handleWinningGame();
+          this.app.app.ticker.remove(b);
         }
-      });
+      }
+      this.app.app.ticker.add(b);
     }
   }
   timeline(): void {
+
     const tl = gsap.timeline({
       onComplete: ((): GSAPCallback => {
+
         const initPositionX = this.app.blink.x;
         const initPositionY = this.app.blink.y;
         return () => {
@@ -141,7 +146,7 @@ export default class GameManager {
     tl.fromTo(
       this.app.blink,
       { alpha: 0 },
-      { alpha: 1, duration: 2, rotation: "+=1" },
+      { alpha: 1, duration: 1, rotation: "+=1" },
     ).to(this.app.blink, { alpha: 0 });
   }
   handleUserClick = () => {
