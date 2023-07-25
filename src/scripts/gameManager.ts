@@ -68,7 +68,8 @@ export default class GameManager {
   }
   toggleDoor = (): void => {
     this.app.door.visible = !this.app.door.visible;
-    this.app.openedDoorContainer.visible = !this.app.openedDoorContainer.visible;
+    this.app.openedDoorContainer.visible =
+      !this.app.openedDoorContainer.visible;
   };
   isInRightDirection(direction: Direction): boolean {
     return direction === this.codeGenerator.secretCode[0].direction;
@@ -99,32 +100,37 @@ export default class GameManager {
       this.resetTimer();
       this.setErrorMessage();
       this.app.handleContainer.eventMode = "passive";
-      setTimeout(() => {
-        this.start();
-        this.updateClock();
-        this.app.handleContainer.eventMode = "static";
-      }, 2000);
+      let elapsed = 0;
+      let delayedReset = (delta: number): void => {
+        elapsed += delta / 60;
+        if (elapsed >= 2) {
+          this.start();
+          this.updateClock();
+          this.app.handleContainer.eventMode = "static";
+          this.app.app.ticker.remove(delayedReset);
+        }
+      };
+      this.app.app.ticker.add(delayedReset);
     }
+
     if (this.codeGenerator.secretCode.length === 0) {
       this.toggleDoor();
       this.app.app.ticker.remove(this.timerCallback);
       this.timeline();
       let store = 0;
-      let b = (delta:number) => {
+      let winingGameTicker = (delta: number) => {
         store += delta / 60;
         if (store >= 5) {
           this.handleWinningGame();
-          this.app.app.ticker.remove(b);
+          this.app.app.ticker.remove(winingGameTicker);
         }
-      }
-      this.app.app.ticker.add(b);
+      };
+      this.app.app.ticker.add(winingGameTicker);
     }
   }
   timeline(): void {
-
     const tl = gsap.timeline({
       onComplete: ((): GSAPCallback => {
-
         const initPositionX = this.app.blink.x;
         const initPositionY = this.app.blink.y;
         return () => {

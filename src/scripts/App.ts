@@ -49,17 +49,17 @@ export default class App {
   }
 
   resize = () => {
-    const designWidth = this.appWidth; 
-    const designHeight = this.appHeight; 
-  
+    const designWidth = this.appWidth;
+    const designHeight = this.appHeight;
+
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-  
+
     const scaleX = screenWidth / designWidth;
     const scaleY = screenHeight / designHeight;
-  
+
     const scale = Math.min(scaleX, scaleY);
-  
+
     this.app.stage.scale.set(scale);
     if (this.isLoaded) {
       this.app.stage.removeChildren();
@@ -107,7 +107,10 @@ export default class App {
     this.background.position.set(this.appWidth / 2, this.appHeight / 2);
 
     this.openedDoorContainer = new PIXI.Container();
-    this.openedDoorContainer.position.set(this.appWidth / 1.56, this.appHeight / 5.3);
+    this.openedDoorContainer.position.set(
+      this.appWidth / 1.56,
+      this.appHeight / 5.3,
+    );
 
     this.openedDoor = PIXI.Sprite.from(this.assets.openedDoor);
     this.openedDoor.width = this.appWidth / 5;
