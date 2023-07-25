@@ -1,0 +1,38 @@
+{
+  "name": "vault-game",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "call-bind": "^1.0.2",
+    "colord": "^2.9.3",
+    "earcut": "^2.2.4",
+    "eventemitter3": "^4.0.7",
+    "function-bind": "^1.1.1",
+    "get-intrinsic": "^1.2.1",
+    "gsap": "^3.12.2",
+    "has": "^1.0.3",
+    "has-proto": "^1.0.1",
+    "has-symbols": "^1.0.3",
+    "ismobilejs": "^1.1.1",
+    "object-inspect": "^1.12.3",
+    "pixi.js": "^7.2.4",
+    "punycode": "^1.4.1",
+    "qs": "^6.11.2",
+    "side-channel": "^1.0.4",
+    "typescript": "^5.1.6",
+    "url": "^0.11.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.2",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.5"
+  }
+}
