@@ -30,7 +30,7 @@ class CodeGenerator {
     this._secretCode = generatedCode;
   }
 
-  public removeCombination(): void {
+  public setNextCombination(): void {
     this._secretCode.shift();
   }
 }

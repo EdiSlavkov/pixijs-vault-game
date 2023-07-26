@@ -48,7 +48,7 @@ export default class App {
     this.clockText = {} as PIXI.BitmapText;
   }
 
-  resize = () => {
+  resize = (): void => {
     const designWidth = this.appWidth;
     const designHeight = this.appHeight;
 
@@ -99,7 +99,7 @@ export default class App {
     return Promise.resolve(this);
   }
 
-  loadScene() {
+  loadScene(): void {
     this.background = PIXI.Sprite.from(this.assets.background);
     this.background.width = this.appWidth;
     this.background.height = this.appHeight;
@@ -143,7 +143,6 @@ export default class App {
     this.handleShadow = PIXI.Sprite.from(this.assets.handleShadow);
     this.handle = PIXI.Sprite.from(this.assets.handle);
     this.handleContainer = new PIXI.Container();
-    this.handleContainer.eventMode = "static";
     this.handleContainer.cursor = "pointer";
     this.handleContainer.x = -90;
     this.handle.anchor.set(0.5);
@@ -152,11 +151,6 @@ export default class App {
     this.handleContainer.addChild(this.handle);
     this.door.addChild(this.handleShadow, this.handleContainer);
 
-    this.clockText = new PIXI.BitmapText("00:00", {
-      fontName: "Desyrel",
-      fontSize: this.appWidth / 95,
-      letterSpacing: 8,
-    });
     this.clockText = new PIXI.BitmapText("00:00", {
       fontName: "Desyrel",
       fontSize: this.appWidth / 95,
