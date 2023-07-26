@@ -19,7 +19,7 @@ npm install
 3. Run npm dev:
 
 ```bash
-npm run build
+npm run dev
 ```
 
 4. Click on the provided local server.
