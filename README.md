@@ -4,7 +4,7 @@
 
 # Vault Game
 
-Vault Game is a simple browser-based game built using Pixi.js library and TypeScript. The objective of the game is to unlock the vault by rotating the handle in the correct direction and combination before the timer runs out.
+Vault Game is a simple browser-based game built using Pixi.js library and TypeScript. The objective of the game is to unlock the vault by rotating the handle in the correct direction and combination.
 
 ## How to Use the App
 
